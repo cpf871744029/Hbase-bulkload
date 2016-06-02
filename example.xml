@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<hdfsPath>/whf/LA/userinfo</hdfsPath>
+<fieldSeparator>\t</fieldSeparator>
+<table name="sign" rowkey="id">
+    <family name="user">
+        <qualify>userName</qualify>
+        <qualify>middleName</qualify>
+        <qualify>image</qualify>
+        <qualify>sex</qualify>
+        <qualify>homeTown</qualify>
+    </family>
+</table>
+</configuration>
