@@ -20,20 +20,32 @@ import org.dom4j.io.XMLWriter;
 public class ParseXml {
         public static String inputPath;
         public static String fieldSeparator;
-    public static Table table;
+        public static Table table;
     //读入数
         public static void parserXml(String fileName)
         {
             File inputXml = new File(fileName);
             SAXReader saxReader = new SAXReader();
             try
-            {
-            	den
+            {   
+            	//读取XML文件,获得document对象
                 Document document = saxReader.read(inputXml);
+                //获取文档的根节点
                 Element stations = document.getRootElement();
-                for(Iterator i = stations.elementIterator(); i.hasNext();)
+                
+              //获取HDFSPath
+                Element path = stations.element("hdfsPath");
+                inputPath=path.getText();
+                
+                //获取分隔符
+                Element separator = stations.element("fieldSeparator");
+                fieldSeparator=separator.getText();
+                
+                
+                Element tab = stations.element("table");
+                //对某节点下的所有子节点进行遍历
+                for(Iterator i = tab.elementIterator(); i.hasNext();)
                 {
-                    Table table = new Table();
                     Element tableNode = (Element) i.next();
                     table.setName(tableNode.attributeValue("name"));
                     String rowkey = tableNode.attributeValue("rowkey");
@@ -50,7 +62,7 @@ public class ParseXml {
                             }
                         }
                         table.getFamilies().add(family);
-                    }
+                    }                   
                 }
             }
             catch (DocumentException e)
