@@ -21,7 +21,7 @@ import org.junit.Test;
 public class ParseXml {
         public static String inputPath;
         public static String fieldSeparator;
-        public static Table table;
+        public static Table table = new Table();
     //∂¡»Î ˝
         public static void parserXml(String fileName)
         {
@@ -44,7 +44,6 @@ public class ParseXml {
                 //System.out.println(fieldSeparator);
                 
                 Element tab = stations.element("table");
-                table = new Table();
                 table.setName(tab.attributeValue("name"));
                 String rowkey = tab.attributeValue("rowkey");
                 table.setRwokey(rowkey);

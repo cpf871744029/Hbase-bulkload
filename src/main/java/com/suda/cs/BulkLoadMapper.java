@@ -28,7 +28,7 @@ public class BulkLoadMapper extends Mapper<LongWritable, Text, ImmutableBytesWri
     public void map(LongWritable key, Text value, Context context){
         try {
             String[] values = value.toString().split(fieldSeperator);
-            if(values.length != qualifyNum){
+            if(values.length != qualifyNum +1){
                 return;
             }
             ImmutableBytesWritable rowKey = new ImmutableBytesWritable(values[0].getBytes());
