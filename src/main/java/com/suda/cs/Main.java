@@ -20,7 +20,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
  * Created by fei on 2016/6/2.
  */
 public class Main {
-	public static int main(String[] args) {
+	public static int main (String[] args) throws Exception{
 		if(args.length !=1){
             System.out.println("xml file is not one, you should provide only one xml file");
             return 0;
