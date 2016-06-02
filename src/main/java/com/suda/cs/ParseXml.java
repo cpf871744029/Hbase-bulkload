@@ -13,6 +13,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+import org.junit.Test;
 /**
  * Created by fei on 2016/5/31.
  */
@@ -36,21 +37,19 @@ public class ParseXml {
               //获取HDFSPath
                 Element path = stations.element("hdfsPath");
                 inputPath=path.getText();
-                
+                //System.out.println(inputPath);
                 //获取分隔符
                 Element separator = stations.element("fieldSeparator");
                 fieldSeparator=separator.getText();
-                
+                //System.out.println(fieldSeparator);
                 
                 Element tab = stations.element("table");
+                table = new Table();
+                table.setName(tab.attributeValue("name"));
+                String rowkey = tab.attributeValue("rowkey");
+                table.setRwokey(rowkey);
                 //对某节点下的所有子节点进行遍历
-                for(Iterator i = tab.elementIterator(); i.hasNext();)
-                {
-                    Element tableNode = (Element) i.next();
-                    table.setName(tableNode.attributeValue("name"));
-                    String rowkey = tableNode.attributeValue("rowkey");
-                    table.setRwokey(rowkey);
-                    for(Iterator j = tableNode.elementIterator(); j.hasNext();)
+                    for(Iterator j = tab.elementIterator(); j.hasNext();)
                     {
                         Family family = new Family();
                         Element familyNode =(Element) j.next();
@@ -59,11 +58,14 @@ public class ParseXml {
                             Element qualify =(Element) k.next();
                             if(qualify.getName().equals("qualify")){
                                 family.getQualifies().add(qualify.getText());
+                                
                             }
                         }
                         table.getFamilies().add(family);
-                    }                   
-                }
+                        
+                    }    
+                    //System.out.println(table.toString());
+                
             }
             catch (DocumentException e)
             {
