@@ -28,6 +28,7 @@ public class ParseXml {
             SAXReader saxReader = new SAXReader();
             try
             {
+            	den
                 Document document = saxReader.read(inputXml);
                 Element stations = document.getRootElement();
                 for(Iterator i = stations.elementIterator(); i.hasNext();)
